@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from 'react';
+import { spriteUrl } from '@/src/assetsLoader';
 import type { Unit, UnitType, GameState as GameStateEnum, Team as TeamEnum, Projectile, GameSettings, VisualEffect, LevelTheme } from '../types';
 import { Team, GameState } from '../types';
 import { runSimulationTick } from '../services/gameLogic';
@@ -389,7 +390,7 @@ const LocalBattleScreen: React.FC<LocalBattleScreenProps> = ({ mode, unlockedUni
         onPointerLeave={handlePointerLeave}
     >
       {/* Fondo solicitado para local battle */}
-      <img src="/Assets/Terrain/battlefield.png" className="absolute w-full h-full object-cover" alt="Battlefield Background" />
+      <img src={spriteUrl('Terrain/battlefield.png')} className="absolute w-full h-full object-cover" alt="Battlefield Background" />
       
       {isTransitioning && (
         <div className="absolute top-[env(safe-area-inset-top)] right-[env(safe-area-inset-right)] bottom-[env(safe-area-inset-bottom)] left-[env(safe-area-inset-left)] bg-black/80 flex flex-col items-center justify-center z-50 animate-fade-in">

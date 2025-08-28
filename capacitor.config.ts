@@ -5,7 +5,12 @@ const config: CapacitorConfig = {
   appName: 'Tiny Battle Simulator',
   webDir: 'dist',
   bundledWebRuntime: false,
-  ios: { contentInset: 'never' }
+  ios: {
+    contentInset: 'never',
+  },
+  server: {
+    iosScheme: 'capacitor',
+  }
 };
 
 export default config;

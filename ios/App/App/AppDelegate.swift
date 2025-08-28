@@ -7,16 +7,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Ajustes WKWebView para evitar rebotes, insets y flashes blancos
-        if let window = self.window,
-           let vc = window.rootViewController as? CAPBridgeViewController,
-           let webView = vc.webView {
-            webView.scrollView.bounces = false
-            if #available(iOS 11.0, *) {
-                webView.scrollView.contentInsetAdjustmentBehavior = .never
-            }
-            webView.isOpaque = false
-            webView.backgroundColor = .black
+        if let vc = self.window?.rootViewController as? CAPBridgeViewController {
+            vc.webView?.scrollView.bounces = false
+            vc.webView?.scrollView.contentInsetAdjustmentBehavior = .never
+            vc.webView?.isOpaque = false
+            vc.webView?.backgroundColor = .black
             vc.view.backgroundColor = .black
         }
         return true

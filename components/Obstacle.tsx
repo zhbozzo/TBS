@@ -1,5 +1,6 @@
 
 import React, { useMemo } from 'react';
+import { spriteUrl } from '@/src/assetsLoader';
 import type { Obstacle } from '../types';
 
 interface ObstacleProps {
@@ -154,7 +155,7 @@ const ObstacleComponent: React.FC<ObstacleProps> = ({ obstacle }) => {
         switch(type) {
             case 'rock':
                 return (
-                    <img src="/Assets/obstacles/rock.png" alt="rock" style={{ width: obsWidth * scaleRockTree, height: obsHeight * scaleRockTree, objectFit: 'contain', transform: `translate(${-obsWidth * (scaleRockTree-1)/2}px, ${-obsHeight * (scaleRockTree-1)/2}px)` }} />
+                    <img src={spriteUrl('obstacles/rock.png')} alt="rock" style={{ width: obsWidth * scaleRockTree, height: obsHeight * scaleRockTree, objectFit: 'contain', transform: `translate(${-obsWidth * (scaleRockTree-1)/2}px, ${-obsHeight * (scaleRockTree-1)/2}px)` }} />
                 );
 
             case 'rock_cluster': {
@@ -169,7 +170,7 @@ const ObstacleComponent: React.FC<ObstacleProps> = ({ obstacle }) => {
                     const x = obsWidth / 2 + Math.cos(angle) * radius - w / 2;
                     const y = obsHeight / 2 + Math.sin(angle) * radius - h / 2;
                     items.push(
-                        <img key={i} src="/Assets/obstacles/rock.png" alt="rock" style={{ position: 'absolute', left: x, top: y, width: w, height: h, objectFit: 'contain' }} />
+                        <img key={i} src={spriteUrl('obstacles/rock.png')} alt="rock" style={{ position: 'absolute', left: x, top: y, width: w, height: h, objectFit: 'contain' }} />
                     );
                 }
                 return <div className="relative w-full h-full">{items}</div>;
@@ -177,18 +178,18 @@ const ObstacleComponent: React.FC<ObstacleProps> = ({ obstacle }) => {
 
             case 'tree': {
                 return (
-                    <img src="/Assets/obstacles/tree.png" alt="tree" style={{ width: obsWidth * scaleRockTree, height: obsHeight * scaleRockTree, objectFit: 'contain', transform: `translate(${-obsWidth * (scaleRockTree-1)/2}px, ${-obsHeight * (scaleRockTree-1)/2}px)` }} />
+                    <img src={spriteUrl('obstacles/tree.png')} alt="tree" style={{ width: obsWidth * scaleRockTree, height: obsHeight * scaleRockTree, objectFit: 'contain', transform: `translate(${-obsWidth * (scaleRockTree-1)/2}px, ${-obsHeight * (scaleRockTree-1)/2}px)` }} />
                 );
             }
             case 'wall': {
                 // Use background tiling to ensure a continuous texture along the wall height
                 return (
-                    <div style={{ width: obsWidth, height: obsHeight, backgroundImage: "url('/Assets/obstacles/wall.png')", backgroundRepeat: 'repeat-y', backgroundSize: '100% auto' }} />
+                    <div style={{ width: obsWidth, height: obsHeight, backgroundImage: `url('${spriteUrl('obstacles/wall.png')}')`, backgroundRepeat: 'repeat-y', backgroundSize: '100% auto' }} />
                 );
             }
             case 'lake': {
                 return (
-                    <img src="/Assets/obstacles/river.png" alt="lake" style={{ width: obsWidth * 1.2, height: obsHeight * 1.2, objectFit: 'contain', transform: `translate(${-obsWidth * 0.1}px, ${-obsHeight * 0.1}px)` }} />
+                    <img src={spriteUrl('obstacles/river.png')} alt="lake" style={{ width: obsWidth * 1.2, height: obsHeight * 1.2, objectFit: 'contain', transform: `translate(${-obsWidth * 0.1}px, ${-obsHeight * 0.1}px)` }} />
                 );
             }
             // rock_cluster handled above using PNGs

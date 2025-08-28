@@ -689,25 +689,27 @@ const GameContainer: React.FC = () => {
   };
 
   return (
-    <div className="safe-wrap w-100dvw min-h-100dvh bg-gray-900 font-sans">
-      <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
-      {showUpdateModal && <UpdateModal onClose={handleCloseUpdateModal} />}
-      {!showUpdateModal && renderScreen()}
-      {rouletteResult && (
-        <RouletteResultModal
-            result={rouletteResult}
-            onClose={() => setRouletteResult(null)}
-            allUnits={ALL_UNIT_TYPES}
-        />
-      )}
-      {isConfigOpen && (
-        <ConfigurationModal 
-            settings={gameSettings}
-            onSettingsChange={setGameSettings}
-            onClose={() => setIsConfigOpen(false)}
-            onOpenPrivacy={screen === 'main_menu' ? (() => { setIsConfigOpen(false); setScreen('privacy'); }) : undefined}
-        />
-      )}
+    <div className="safe-wrap">
+      <main className="stage">
+        <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
+        {showUpdateModal && <UpdateModal onClose={handleCloseUpdateModal} />}
+        {!showUpdateModal && renderScreen()}
+        {rouletteResult && (
+          <RouletteResultModal
+              result={rouletteResult}
+              onClose={() => setRouletteResult(null)}
+              allUnits={ALL_UNIT_TYPES}
+          />
+        )}
+        {isConfigOpen && (
+          <ConfigurationModal
+              settings={gameSettings}
+              onSettingsChange={setGameSettings}
+              onClose={() => setIsConfigOpen(false)}
+              onOpenPrivacy={screen === 'main_menu' ? (() => { setIsConfigOpen(false); setScreen('privacy'); }) : undefined}
+          />
+        )}
+      </main>
     </div>
   );
 };
