@@ -1,4 +1,5 @@
 
+import { soundUrl } from '@/src/assetsLoader';
 let audioContext: AudioContext | null = null;
 const audioBuffers = new Map<string, AudioBuffer>();
 let musicAudioElement: HTMLAudioElement | null = null;
@@ -97,31 +98,23 @@ async function getAudioBuffer(soundFile: string): Promise<AudioBuffer | null> {
         return audioBuffers.get(soundFile)!;
     }
 
-    async function tryGet(url: string): Promise<AudioBuffer | null> {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) return null;
-            const arrayBuffer = await response.arrayBuffer();
-            const audioBuffer = await audioContext!.decodeAudioData(arrayBuffer);
-            return audioBuffer;
-        } catch {
-            return null;
-        }
+    const url = soundUrl(soundFile);
+    if (!url) {
+        // The error is already logged by soundUrl
+        return null;
     }
 
-    const urlOrder = [
-        `/Assets/sound/${soundFile}`,
-        `/sounds/${soundFile}`,
-    ];
-
-    for (const url of urlOrder) {
-        const buffer = await tryGet(url);
-        if (buffer) {
-            audioBuffers.set(soundFile, buffer);
-            return buffer;
-        }
+    try {
+        const response = await fetch(url);
+        if (!response.ok) return null;
+        const arrayBuffer = await response.arrayBuffer();
+        const audioBuffer = await audioContext!.decodeAudioData(arrayBuffer);
+        audioBuffers.set(soundFile, audioBuffer);
+        return audioBuffer;
+    } catch (error) {
+        console.error(`Failed to load audio buffer for: ${soundFile}`, error);
+        return null;
     }
-    return null;
 }
 
 export const playSound = (soundFile: string | undefined, volume: number = 0.6) => {
@@ -150,47 +143,35 @@ export const playMusic = (track?: string, loop: boolean = true, volumeScale: num
     const trackToPlay = track || DEFAULT_MUSIC_TRACK;
     if (!trackToPlay) return;
 
-    let trackSrc = `/Assets/sound/${trackToPlay}`;
+    const trackSrc = soundUrl(trackToPlay);
+    if (!trackSrc) {
+        // If the requested track is not found, try falling back to the default track.
+        if (trackToPlay !== DEFAULT_MUSIC_TRACK) {
+            playMusic(DEFAULT_MUSIC_TRACK, loop, volumeScale);
+        }
+        return;
+    }
 
     // If the correct music is already playing, do nothing.
     if (musicAudioElement && musicAudioElement.src.endsWith(trackSrc) && !musicAudioElement.paused) {
         return;
     }
 
+    // Stop and clear any existing music
     if (musicAudioElement) {
         musicAudioElement.pause();
         musicAudioElement.onerror = null;
         musicAudioElement = null;
     }
 
-    let audio = new Audio(trackSrc);
+    const audio = new Audio(trackSrc);
     musicAudioElement = audio;
     audio.volume = masterVolume.music * volumeScale;
     audio.loop = loop;
 
-    // Handle error gracefully without logging to the console.
-    // This makes music an optional feature that doesn't produce errors if files are missing.
-    audio.onerror = () => {
-        // Try /sounds/ fallback first
-        const fallbackSrc = `/sounds/${trackToPlay}`;
-        const fb = new Audio(fallbackSrc);
-        fb.volume = masterVolume.music * volumeScale;
-        fb.loop = loop;
-        fb.onerror = () => {
-            if (trackToPlay !== DEFAULT_MUSIC_TRACK) {
-                playMusic(DEFAULT_MUSIC_TRACK, loop);
-            } else {
-                if (musicAudioElement === audio) {
-                    musicAudioElement = null;
-                }
-            }
-        };
-        musicAudioElement = fb;
-        fb.play().catch(() => { musicAudioElement = null; });
-    };
-
-    // Also silence the play() promise rejection.
-    audio.play().catch(() => {
+    // Handle potential errors, like the user not having interacted with the page yet.
+    audio.play().catch(error => {
+        console.warn(`Could not play music track "${trackToPlay}". User interaction might be required.`, error);
         if (musicAudioElement === audio) {
             musicAudioElement = null;
         }

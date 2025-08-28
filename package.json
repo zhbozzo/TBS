@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/copy-assets.mjs",
     "build": "vite build && node scripts/postbuild-fix-html.mjs",
     "preview": "vite preview",
     "cap:sync": "npx cap sync",

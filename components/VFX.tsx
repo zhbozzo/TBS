@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { spriteUrl } from '@/src/assetsLoader';
 import type { VisualEffect } from '../types';
 
 interface VFXProps {
@@ -21,7 +22,7 @@ const VFXComponent: React.FC<VFXProps> = ({ vfx }) => {
       return (
         <div style={baseStyle}>
           <img
-            src="/Assets/spells/light.png"
+            src={spriteUrl('spells/light.png')}
             alt="Lightning"
             className="lightning-effect"
             style={{

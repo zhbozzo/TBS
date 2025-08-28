@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect, useRef } from 'react';
+import { spriteUrl } from '@/src/assetsLoader';
 import type { Unit, GameState as GameStateEnum } from '../types';
 import { Team, GameState } from '../types';
 
@@ -48,7 +49,7 @@ const UnitComponent: React.FC<UnitProps> = ({ unit, gameState, onClick }) => {
 
   const [hasCustomIcon, setHasCustomIcon] = useState<boolean>(false);
   
-  const customIconUrl = `/Assets/troops/${
+  const iconName = (
     unit.id === 'melee' ? 'knight' :
     unit.id === 'ranged' ? 'archer' :
     unit.id === 'tank' ? 'guardian' :
@@ -83,9 +84,15 @@ const UnitComponent: React.FC<UnitProps> = ({ unit, gameState, onClick }) => {
     unit.id === 'bombardino_crocodilo' ? 'BombardinoCrocodilo' :
     unit.id === 'musqueteer' ? 'musqueteer' :
     'knight'
-  }.png`;
+  );
+
+  const customIconUrl = spriteUrl(`troops/${iconName}.png`);
 
   useEffect(() => {
+    if (!customIconUrl) {
+      setHasCustomIcon(false);
+      return;
+    }
     // Check for custom icon
     const img = new Image();
     img.onload = () => setHasCustomIcon(true);

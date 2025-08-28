@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from 'react';
+import { spriteUrl, soundUrl } from '@/src/assetsLoader';
 import type { Unit, UnitType, GameState as GameStateEnum, Team as TeamEnum, Level, Projectile, AdminFlags, GameSettings, VisualEffect, SpellId } from '../types';
 import { Team, GameState } from '../types';
 import { runSimulationTick } from '../services/gameLogic';
@@ -95,13 +96,13 @@ const BattleScreen: React.FC<BattleScreenProps> = ({ level, unlockedUnits, onWin
 
   const [useCustomBackground, setUseCustomBackground] = useState(false);
   const terrainByWorld: Record<number, string> = {
-    1: '/Assets/Terrain/grass.png',
-    2: '/Assets/Terrain/desert.png',
-    3: '/Assets/Terrain/crystal.png',
-    4: '/Assets/Terrain/magma.png',
-    5: '/Assets/Terrain/glacial.png',
+    1: spriteUrl('Terrain/grass.png'),
+    2: spriteUrl('Terrain/desert.png'),
+    3: spriteUrl('Terrain/crystal.png'),
+    4: spriteUrl('Terrain/magma.png'),
+    5: spriteUrl('Terrain/glacial.png'),
   };
-  const battlefieldFallback = '/Assets/Terrain/battlefieldbackground.png';
+  const battlefieldFallback = spriteUrl('Terrain/battlefieldbackground.png');
   const customBgUrl = terrainByWorld[level.world] || battlefieldFallback;
   
   const [scale, setScale] = useState(1);
@@ -945,7 +946,7 @@ const BattleScreen: React.FC<BattleScreenProps> = ({ level, unlockedUnits, onWin
                  data-tutorial-id={spell.id === 'lightning' ? 'spell-button-lightning' : undefined}
               >
                  <img 
-                   src={`/Assets/spells/${assetName}.png`}
+                   src={spriteUrl(`spells/${assetName}.png`)}
                    alt={spell.name}
                    className={`w-8 h-8 ${!canAfford ? 'opacity-50' : ''}`}
                    style={{ filter: canAfford ? 'drop-shadow(0 0 4px rgba(34,211,238,0.5))' : 'none' }}
