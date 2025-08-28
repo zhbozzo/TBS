@@ -199,7 +199,7 @@ const LevelSelectScreen: React.FC<LevelSelectScreenProps> = ({ levels, highestLe
 
   return (
     <div className="w-full h-full p-8 flex flex-col bg-gray-900 text-white overflow-hidden">
-      <header className="w-full max-w-7xl flex justify-between items-center mb-8 mx-auto">
+      <header className="w-full flex justify-between items-center mb-8 px-4">
         <button 
             onClick={handleBack}
             onMouseDown={() => { initAudio(); playSound('ES_Button Click, Input Response, Tap, Short - Epidemic Sound - 0000-0119.wav', 0.5); }}
@@ -213,7 +213,7 @@ const LevelSelectScreen: React.FC<LevelSelectScreenProps> = ({ levels, highestLe
         <div className="w-40"></div>
       </header>
       
-      <main className="flex-grow w-full max-w-7xl mx-auto relative bg-gray-800/20 rounded-2xl border border-gray-700 overflow-y-hidden"
+      <main className="flex-grow w-full relative bg-gray-800/20 rounded-2xl border border-gray-700 overflow-y-hidden px-4"
             style={{ overflowX: viewMode === 'levels' ? 'auto' : 'hidden' }}
       >
         {/* Worlds View */}

@@ -32,7 +32,7 @@ const HUD: React.FC<HUDProps> = ({ budget, unitCount, levelName, onStart, onSpee
   const disabledButtonClasses = `bg-gray-600 text-gray-400 cursor-not-allowed ${buttonBaseClasses}`;
 
   return (
-    <div className="w-full max-w-5xl p-4 flex justify-between items-center bg-gray-800 bg-opacity-80 rounded-b-xl shadow-lg z-10">
+    <div className="fixed top-[env(safe-area-inset-top)] left-[env(safe-area-inset-left)] right-[env(safe-area-inset-right)] p-4 flex justify-between items-center bg-gray-800/80 rounded-b-xl shadow-lg z-10">
       <div className="flex items-center space-x-6">
          <button onClick={onBack} className={secondaryButtonClasses + " px-4 py-1 text-base"}>
           &larr; {isLocal ? 'Menu' : 'Levels'}

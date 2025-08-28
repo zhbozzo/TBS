@@ -153,7 +153,7 @@ const BrainrotSelector: React.FC<{
     };
 
     return (
-        <div className={`fixed inset-0 bg-black/80 flex items-center justify-center z-50 transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
+        <div className={`fixed top-[env(safe-area-inset-top)] right-[env(safe-area-inset-right)] bottom-[env(safe-area-inset-bottom)] left-[env(safe-area-inset-left)] bg-black/80 flex items-center justify-center z-50 transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
             <div className={`bg-gray-800 rounded-2xl border-2 border-purple-500 shadow-2xl p-8 flex flex-col items-center transition-all duration-300 ${isClosing ? 'scale-90 opacity-0' : 'scale-100 opacity-100'}`}>
                 <h2 className="text-3xl font-bold text-yellow-300 mb-2">Brainrot Unit Incoming!</h2>
                 <p className="text-gray-400 mb-6 h-6">{isSpinning ? "Get ready!" : "Congratulations!"}</p>

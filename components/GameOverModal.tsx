@@ -54,8 +54,8 @@ const GameOverModal: React.FC<GameOverModalProps> = ({ winner, onTryAgain, onTry
   const exitButtonClasses = `bg-gray-600 hover:bg-gray-500 text-white ${primaryButtonClasses}`;
 
   return (
-    <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-      <div className="bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700 text-center flex flex-col items-center animate-fade-in-up">
+    <div className="absolute top-[env(safe-area-inset-top)] right-[env(safe-area-inset-right)] bottom-[env(safe-area-inset-bottom)] left-[env(safe-area-inset-left)] bg-black/70 flex items-center justify-center z-50">
+      <div className="bg-gray-800 p-6 md:p-8 rounded-xl shadow-2xl border border-gray-700 text-center flex flex-col items-center animate-fade-in-up w-[min(100dvw-32px,72rem)] max-w-none mx-auto">
         <h2 className={`text-6xl font-extrabold mb-2 ${winnerColor}`}>{winnerText}</h2>
         {isVictory && !isLocal && (
           <p className="text-xl text-gray-200 mb-4">

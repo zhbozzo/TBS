@@ -4,6 +4,7 @@ import GameContainer from './App';
 import { Capacitor } from '@capacitor/core';
 import { StatusBar } from '@capacitor/status-bar';
 import { Keyboard } from '@capacitor/keyboard';
+import './index.css';
 
 async function setupNativeUI() {
   if (!Capacitor.isNativePlatform()) return;

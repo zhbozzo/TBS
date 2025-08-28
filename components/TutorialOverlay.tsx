@@ -75,7 +75,7 @@ const TutorialOverlay: React.FC<TutorialOverlayProps> = ({ content, onNext, onSk
 
     return (
         <div 
-            className="fixed inset-0 z-[1000] animate-fade-in"
+            className="fixed top-[env(safe-area-inset-top)] right-[env(safe-area-inset-right)] bottom-[env(safe-area-inset-bottom)] left-[env(safe-area-inset-left)] z-[1000] animate-fade-in"
             onClick={!isInteractiveStep && onNext ? onNext : undefined}
             style={{ pointerEvents: isInteractiveStep ? 'none' : 'auto' }}
         >

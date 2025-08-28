@@ -39,10 +39,11 @@ const RouletteResultModal: React.FC<RouletteResultModalProps> = ({ result, onClo
   const unitInfo = isUnit ? allUnits.find(u => u.id === result.id) : null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 animate-fade-in">
+    <div className="fixed top-[env(safe-area-inset-top)] right-[env(safe-area-inset-right)] bottom-[env(safe-area-inset-bottom)] left-[env(safe-area-inset-left)] bg-black/70 flex items-center justify-center z-50 animate-fade-in" onClick={onClose}>
       <div
         ref={modalRef}
-        className="bg-gray-800 w-full max-w-md p-8 rounded-2xl shadow-2xl border-2 border-purple-500 text-center flex flex-col items-center animate-scale-in"
+        className="bg-gray-800 w-[min(100dvw-32px,56rem)] max-w-none p-6 md:p-8 rounded-2xl shadow-2xl border-2 border-purple-500 text-center flex flex-col items-center animate-scale-in mx-auto"
+        onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-3xl font-extrabold text-yellow-300 mb-4">
             {isUnit ? "New Unit Unlocked!" : "You Won Gold!"}

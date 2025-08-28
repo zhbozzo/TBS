@@ -71,7 +71,7 @@ const GetGoldScreen: React.FC<GetGoldScreenProps> = ({
 
   return (
     <div className="w-full h-full p-8 flex flex-col items-center bg-gray-900 text-white overflow-y-auto">
-      <header className="w-full max-w-4xl flex justify-between items-center mb-8">
+      <header className="w-full flex justify-between items-center mb-8 px-4">
         <button
           onClick={onBack}
           className="px-6 py-2 rounded-lg text-lg font-bold shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 bg-gray-600 hover:bg-gray-500 text-white flex items-center gap-2"
@@ -83,7 +83,7 @@ const GetGoldScreen: React.FC<GetGoldScreenProps> = ({
         <div className="w-32"></div>
       </header>
 
-      <main className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
+      <main className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
         {/* Daily Reward Card */}
         <div className="bg-gray-800 rounded-xl border-2 border-indigo-500/50 p-6 flex flex-col items-center text-center shadow-lg shadow-indigo-500/10">
             <div className="bg-indigo-500/20 p-4 rounded-full mb-4">
@@ -124,7 +124,7 @@ const GetGoldScreen: React.FC<GetGoldScreenProps> = ({
         </div>
       </main>
       
-      <section className="w-full max-w-4xl mt-12">
+      <section className="w-full mt-12 px-4">
           <h2 className="text-center text-3xl font-bold mb-6 text-purple-400">Premium Store</h2>
           <div className={`grid grid-cols-1 gap-6 ${isAdFree ? 'md:grid-cols-3' : 'md:grid-cols-4'}`}>
               <GoldPackCard 

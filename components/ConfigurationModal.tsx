@@ -42,10 +42,10 @@ const ConfigurationModal: React.FC<ConfigurationModalProps> = ({ settings, onSet
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 animate-fade-in">
+    <div className="fixed top-[env(safe-area-inset-top)] right-[env(safe-area-inset-right)] bottom-[env(safe-area-inset-bottom)] left-[env(safe-area-inset-left)] bg-black/70 flex items-center justify-center z-50 animate-fade-in">
       <div
         ref={modalRef}
-        className="bg-gray-800 w-full max-w-md p-8 rounded-2xl shadow-2xl border border-gray-700 text-center flex flex-col items-center animate-scale-in"
+        className="bg-gray-800 w-[min(100dvw-32px,56rem)] max-w-none p-6 md:p-8 rounded-2xl shadow-2xl border border-gray-700 text-center flex flex-col items-center animate-scale-in mx-auto"
       >
         <div className="flex items-center gap-4 mb-6">
             <GearIcon className="w-10 h-10 text-yellow-400" />

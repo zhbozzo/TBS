@@ -392,7 +392,7 @@ const LocalBattleScreen: React.FC<LocalBattleScreenProps> = ({ mode, unlockedUni
       <img src="/Assets/Terrain/battlefield.png" className="absolute w-full h-full object-cover" alt="Battlefield Background" />
       
       {isTransitioning && (
-        <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center z-50 animate-fade-in">
+        <div className="absolute top-[env(safe-area-inset-top)] right-[env(safe-area-inset-right)] bottom-[env(safe-area-inset-bottom)] left-[env(safe-area-inset-left)] bg-black/80 flex flex-col items-center justify-center z-50 animate-fade-in">
             <h2 className="text-5xl font-bold text-red-400">Player 2's Turn</h2>
             <p className="text-xl text-gray-300 mt-4">Red team, prepare for deployment!</p>
         </div>
