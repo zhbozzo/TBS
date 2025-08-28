@@ -1,0 +1,27 @@
+{
+  "NSPrivacyTracking": true,
+  "NSPrivacyTrackingDomains": [
+    "googleads.g.doubleclick.net",
+    "pagead2.googlesyndication.com"
+  ],
+  "NSPrivacyCollectedDataTypes": [
+    {
+      "NSPrivacyCollectedDataType": "IDFA",
+      "NSPrivacyCollectedDataTypeTracking": true,
+      "NSPrivacyCollectedDataTypeLinked": false,
+      "NSPrivacyCollectedDataTypePurposes": ["Advertising"]
+    },
+    {
+      "NSPrivacyCollectedDataType": "CoarseLocation",
+      "NSPrivacyCollectedDataTypeTracking": false,
+      "NSPrivacyCollectedDataTypeLinked": false,
+      "NSPrivacyCollectedDataTypePurposes": ["Analytics", "AppFunctionality"]
+    }
+  ],
+  "NSPrivacyAccessedAPITypes": [
+    {
+      "NSPrivacyAccessedAPIType": "NSUserDefaults",
+      "NSPrivacyAccessedAPITypeReasons": ["CA92.1"]
+    }
+  ]
+}

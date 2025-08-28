@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Tiny Battle Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/index.css">
+    <script>
+      (function setViewportVars(){
+        function apply(){
+          try {
+            var vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight) * 0.01;
+            var vw = (window.visualViewport ? window.visualViewport.width  : window.innerWidth)  * 0.01;
+            document.documentElement.style.setProperty('--vh', vh + 'px');
+            document.documentElement.style.setProperty('--vw', vw + 'px');
+          } catch (e) {}
+        }
+        apply();
+        window.addEventListener('resize', apply);
+        window.addEventListener('orientationchange', apply);
+        if (window.visualViewport) {
+          window.visualViewport.addEventListener('resize', apply);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
