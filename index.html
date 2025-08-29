@@ -25,6 +25,26 @@
         }
       })();
     </script>
+    <script>
+      (function(){
+        function showError(msg){
+          try{
+            var el=document.getElementById('fatal-js-error');
+            if(!el){
+              el=document.createElement('pre');
+              el.id='fatal-js-error';
+              el.style.cssText='position:fixed;inset:0;z-index:999999;background:#111;color:#f66;margin:0;padding:12px;font-family:monospace;white-space:pre-wrap;overflow:auto';
+              document.body.appendChild(el);
+            }
+            el.textContent='JS Error: '+msg;
+            console.error('[BOOT-ERROR]', msg);
+          }catch(_){}
+        }
+        window.addEventListener('error', function(e){ showError(e.error? (e.error.stack||e.error.message||e.error): (e.message||e)); });
+        window.addEventListener('unhandledrejection', function(e){ showError(e.reason? (e.reason.stack||e.reason.message||e.reason): e); });
+        console.log('[BOOT] index.html loaded');
+      })();
+    </script>
   </head>
   <body class="fixed inset-0 overflow-hidden">
     <div id="root"></div>

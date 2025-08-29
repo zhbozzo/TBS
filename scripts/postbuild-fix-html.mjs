@@ -19,4 +19,18 @@ html = html.replace(/src="\/assets\//g, 'src="./assets/');
 writeFileSync(distIndex, html);
 console.log('[postbuild] HTML ajustado para WKWebView (sin crossorigin, rutas relativas).');
 
+// Inline del CSS principal para evitar fallos de carga del CSS en WKWebView
+const cssMatch = html.match(/<link\s+rel=["']stylesheet["'][^>]*href=["'](.+?index-[^"']+\.css)["'][^>]*>/);
+if (cssMatch) {
+  const cssPath = resolve(process.cwd(), 'dist', cssMatch[1].replace(/^\.\//, ''));
+  try {
+    const css = readFileSync(cssPath, 'utf8');
+    html = html.replace(cssMatch[0], `<style>${css}</style>`);
+    writeFileSync(distIndex, html);
+    console.log('[postbuild] CSS inlined en index.html para mayor fiabilidad en iOS.');
+  } catch (e) {
+    console.warn('[postbuild] No se pudo inlinear CSS:', e.message);
+  }
+}
+
 

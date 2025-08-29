@@ -24,16 +24,22 @@ async function setupNativeUI() {
   } catch {}
 }
 
-setupNativeUI();
+setupNativeUI().catch((e) => console.error('[BOOT setupNativeUI error]', e));
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error("Could not find root element to mount to");
 }
 
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <GameContainer />
-  </React.StrictMode>
-);
+try {
+  console.log('[BOOT] React mounting...');
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <GameContainer />
+    </React.StrictMode>
+  );
+  console.log('[BOOT] React mounted');
+} catch (e) {
+  console.error('[BOOT React error]', e);
+}
